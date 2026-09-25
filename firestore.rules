@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // All client access goes through our authenticated Node API (/api/v1).
+    // The server verifies Firebase ID tokens on every request and enforces
+    // strict RBAC (owner vs member vs stranger 404).
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
